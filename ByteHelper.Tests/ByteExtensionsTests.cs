@@ -152,5 +152,108 @@ namespace ByteHelper.Tests
 
         #endregion
 
+        #region InsertBytes tests
+
+        [TestMethod]
+        public void GivenNullArray_WhenInsertBytes_ReturnEmptyArray()
+        {
+            byte[] bytes = null;
+
+            var result = bytes.InsertBytes(new byte[] { 1 }, 1);
+
+            result.Length.Should().Be(0);
+
+        }
+
+        [TestMethod]
+        public void GivenEmptyArray_WhenInsertBytes_ReturnEmptyArray()
+        {
+            byte[] bytes = { };
+
+            var result = bytes.InsertBytes(new byte[] { 1 }, 1);
+
+            result.Length.Should().Be(0);
+
+        }
+
+        [TestMethod]
+        public void GivenNullArrayToInsert_WhenInsertBytes_ReturnFirstArray()
+        {
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.InsertBytes(null, 1);
+
+            result.Length.Should().Be(bytes.Length);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+        }
+
+        [TestMethod]
+        public void GivenEmptyArrayToInsert_WhenInsertBytes_ReturnFirstArray()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.InsertBytes(new byte[] { }, 1);
+
+            result.Length.Should().Be(bytes.Length);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+        }
+
+        [TestMethod]
+        public void GivenInsertAtOutOfBounds_WhenInsertBytes_ReturnFirstArray()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.InsertBytes(new byte[] { 1 }, 4);
+
+            result.Length.Should().Be(bytes.Length);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+        }
+
+        [TestMethod]
+        public void GivenDataToInsert_WhenInsertBytes_ReturnFirstArray()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            const int expecteInsertedNumber1 = 4;
+            const int expecteInsertedNumber2 = 5;
+            var insertedData = new byte[] { expecteInsertedNumber1, expecteInsertedNumber2 };
+            var result = bytes.InsertBytes(insertedData, 2);
+
+            result.Length.Should().Be(bytes.Length + insertedData.Length);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteInsertedNumber1);
+            result[3].Should().Be(expecteInsertedNumber2);
+            result[4].Should().Be(expecteNumber3);
+
+        }
+        #endregion
     }
 }

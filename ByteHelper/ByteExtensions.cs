@@ -52,5 +52,25 @@ namespace ByteHelper
             return bytes;
 
         }
+
+        public static byte[] InsertBytes(this byte[] source, byte[] bytesToInsert, int insertAt)
+        {
+            if (source == null || source.Length == 0)
+            {
+                return new byte[] { };
+            }
+
+            if (bytesToInsert == null || bytesToInsert.Length == 0 || insertAt > source.Length)
+            {
+                return source;
+            }
+
+            byte[] bytes = new byte[source.Length + bytesToInsert.Length];
+            Buffer.BlockCopy(source, 0, bytes, 0, insertAt);
+            Buffer.BlockCopy(bytesToInsert, 0, bytes, insertAt, bytesToInsert.Length);
+            Buffer.BlockCopy(source, insertAt, bytes, insertAt + bytesToInsert.Length, source.Length - insertAt);
+
+            return bytes;
+        }
     }
 }
