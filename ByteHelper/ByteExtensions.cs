@@ -17,13 +17,14 @@ namespace ByteHelper
         /// number of bytes in the array, it will return an empty array.</remarks>
         public static byte[] GetBytes(this byte[] source, int startAt, int length)
         {
-            if (source == null || startAt + length > source.Length || length < 1)
+            if (source == null || length < 1)
             {
                 return new byte[] { };
             }
 
-            var bytes = new byte[length];
-            Buffer.BlockCopy(source, startAt, bytes, 0, length);
+            var dataToReturnLength = startAt + length > source.Length ? source.Length - startAt : length;
+            var bytes = new byte[dataToReturnLength];
+            Buffer.BlockCopy(source, startAt, bytes, 0, dataToReturnLength);
             return bytes;
 
         }
@@ -70,6 +71,36 @@ namespace ByteHelper
             Buffer.BlockCopy(bytesToInsert, 0, bytes, insertAt, bytesToInsert.Length);
             Buffer.BlockCopy(source, insertAt, bytes, insertAt + bytesToInsert.Length, source.Length - insertAt);
 
+            return bytes;
+        }
+
+        public static byte[] RemoveBytes(this byte[] source, int removeAt, int length)
+        {
+
+            if (source == null || source.Length == 0)
+            {
+                return new byte[] { };
+            }
+
+            if (removeAt < 0 || removeAt > source.Length || length < 1)
+            {
+                return source;
+            }
+            
+            byte[] bytes;
+            if (removeAt + length > source.Length)
+            {
+                var subLength = source.Length - removeAt;
+                bytes = new byte[subLength];
+                Buffer.BlockCopy(source, 0, bytes, 0, subLength);
+            }
+            else
+            {
+                bytes = new byte[source.Length - length];
+                Buffer.BlockCopy(source, 0, bytes, 0, removeAt);
+                Buffer.BlockCopy(source, removeAt + length, bytes, removeAt, source.Length - removeAt - length);
+
+            }
             return bytes;
         }
     }

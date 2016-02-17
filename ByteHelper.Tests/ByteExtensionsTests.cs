@@ -15,8 +15,10 @@ namespace ByteHelper.Tests
         public void GivenNullByteArray_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = null;
+
             // ReSharper disable once ExpressionIsAlwaysNull
             var result = bytes.GetBytes(0, 1);
+
             result.Length.Should().Be(0);
         }
 
@@ -24,7 +26,9 @@ namespace ByteHelper.Tests
         public void GivenEmptyByteArray_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = { };
+
             var result = bytes.GetBytes(0, 1);
+
             result.Length.Should().Be(0);
         }
 
@@ -49,13 +53,13 @@ namespace ByteHelper.Tests
         }
 
         [TestMethod]
-        public void GivenStartAtPlusLengthGreaterThanArrayLength_WhenGetBytes_ReturnEmptyByteArray()
+        public void GivenStartAtPlusLengthGreaterThanArrayLength_WhenGetBytes_ReturnSourceArrayFromStartAtToEnd()
         {
             byte[] bytes = { 1, 2 };
 
             var result = bytes.GetBytes(0, 3);
 
-            result.Length.Should().Be(0);
+            result.Length.Should().Be(2);
         }
 
         [TestMethod]
@@ -87,6 +91,7 @@ namespace ByteHelper.Tests
 
             result.Length.Should().Be(1);
             result[0].Should().Be(expectedNumber2);
+
         }
 
         #endregion
@@ -159,6 +164,7 @@ namespace ByteHelper.Tests
         {
             byte[] bytes = null;
 
+            // ReSharper disable once ExpressionIsAlwaysNull
             var result = bytes.InsertBytes(new byte[] { 1 }, 1);
 
             result.Length.Should().Be(0);
@@ -182,7 +188,6 @@ namespace ByteHelper.Tests
             const int expecteNumber1 = 1;
             const int expecteNumber2 = 2;
             const int expecteNumber3 = 3;
-
             byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
 
             var result = bytes.InsertBytes(null, 1);
@@ -201,7 +206,6 @@ namespace ByteHelper.Tests
             const int expecteNumber1 = 1;
             const int expecteNumber2 = 2;
             const int expecteNumber3 = 3;
-
             byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
 
             var result = bytes.InsertBytes(new byte[] { }, 1);
@@ -220,7 +224,6 @@ namespace ByteHelper.Tests
             const int expecteNumber1 = 1;
             const int expecteNumber2 = 2;
             const int expecteNumber3 = 3;
-
             byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
 
             var result = bytes.InsertBytes(new byte[] { 1 }, 4);
@@ -233,19 +236,19 @@ namespace ByteHelper.Tests
         }
 
         [TestMethod]
-        public void GivenDataToInsert_WhenInsertBytes_ReturnFirstArray()
+        public void GivenDataToInsert_WhenInsertBytes_ReturnEntireData()
         {
 
             const int expecteNumber1 = 1;
             const int expecteNumber2 = 2;
             const int expecteNumber3 = 3;
             byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
-
             const int expecteInsertedNumber1 = 4;
             const int expecteInsertedNumber2 = 5;
-            var insertedData = new byte[] { expecteInsertedNumber1, expecteInsertedNumber2 };
-            var result = bytes.InsertBytes(insertedData, 2);
 
+            var insertedData = new byte[] { expecteInsertedNumber1, expecteInsertedNumber2 };
+
+            var result = bytes.InsertBytes(insertedData, 2);
             result.Length.Should().Be(bytes.Length + insertedData.Length);
             result[0].Should().Be(expecteNumber1);
             result[1].Should().Be(expecteNumber2);
@@ -255,5 +258,135 @@ namespace ByteHelper.Tests
 
         }
         #endregion
+
+        #region RemoveBytes tests
+
+        [TestMethod]
+        public void GivenNullArray_WhenRemove_ReturnEmptyByteArray()
+        {
+
+            byte[] bytes = null;
+
+            // ReSharper disable once ExpressionIsAlwaysNull
+            var result = bytes.RemoveBytes(0, 10);
+
+            result.Length.Should().Be(0);
+
+        }
+
+
+        [TestMethod]
+        public void GivenEmtpyArray_WhenRemove_ReturnEmptyByteArray()
+        {
+
+            byte[] bytes = { };
+
+            var result = bytes.RemoveBytes(0, 10);
+
+            result.Length.Should().Be(0);
+
+        }
+
+        [TestMethod]
+        public void GivenRemoveAtOutOfBounds_WhenRemove_ReturnSourceArray()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.RemoveBytes(-1, 10);
+
+            result.Length.Should().Be(3);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+            result = bytes.RemoveBytes(4, 10);
+
+            result.Length.Should().Be(3);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+        }
+
+        [TestMethod]
+        public void GivenRemoveAtPlusLengthGreaterThanDataLength_WhenRemove_ReturnSourceArrayUpToRemoveAt()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.RemoveBytes(1, 10);
+
+            result.Length.Should().Be(2);
+            result[0].Should().Be(expecteNumber1);
+
+        }
+
+        [TestMethod]
+        public void GivenLengthZeroOrNegative_WhenRemove_ReturnSourceArray()
+        {
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3 };
+
+            var result = bytes.RemoveBytes(0, -1);
+
+            result.Length.Should().Be(3);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+
+            result = bytes.RemoveBytes(0, 0);
+
+            result.Length.Should().Be(3);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+        }
+
+        [TestMethod]
+        public void GivenDataToRemove_WhenRemove_ReturnSourceWithoutDataRemoved()
+        {
+
+            const int expecteNumber1 = 1;
+            const int expecteNumber2 = 2;
+            const int expecteNumber3 = 3;
+            const int expecteNumber4 = 4;
+            const int expecteNumber5 = 5;
+            byte[] bytes = { expecteNumber1, expecteNumber2, expecteNumber3, expecteNumber4, expecteNumber5 };
+
+            var result = bytes.RemoveBytes(2, 2);
+
+            result.Length.Should().Be(3);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber5);
+
+            bytes = new byte[] { expecteNumber1, expecteNumber2, expecteNumber3, expecteNumber4, expecteNumber5 };
+
+            result = bytes.RemoveBytes(0, 5);
+            result.Length.Should().Be(0);
+
+            bytes = new byte[] { expecteNumber1, expecteNumber2, expecteNumber3, expecteNumber4, expecteNumber5 };
+
+            result = bytes.RemoveBytes(3, 1);
+
+            result.Length.Should().Be(4);
+            result[0].Should().Be(expecteNumber1);
+            result[1].Should().Be(expecteNumber2);
+            result[2].Should().Be(expecteNumber3);
+            result[3].Should().Be(expecteNumber5);
+
+
+        }
+        #endregion
     }
 }
+
