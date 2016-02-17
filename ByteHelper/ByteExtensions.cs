@@ -29,6 +29,12 @@ namespace ByteHelper
 
         }
 
+        /// <summary>
+        /// Append bytes to a byte array
+        /// </summary>
+        /// <param name="source">The source byte array</param>
+        /// <param name="bytesToAppend">Bytes to append</param>
+        /// <returns>A byte array comprising the oringinal bytes and the appended bytes</returns>
         public static byte[] AppendBytes(this byte[] source, byte[] bytesToAppend)
         {
             if (source == null && bytesToAppend == null)
@@ -54,6 +60,13 @@ namespace ByteHelper
 
         }
 
+        /// <summary>
+        /// Insert bytes into a byte array
+        /// </summary>
+        /// <param name="source">The byte array where the bytes are inserted</param>
+        /// <param name="bytesToInsert">The bytes to insert</param>
+        /// <param name="insertAt">The index at wich the bytes are inserted</param>
+        /// <returns>A byte array with the comprising the original bytes and the inserted bytes</returns>
         public static byte[] InsertBytes(this byte[] source, byte[] bytesToInsert, int insertAt)
         {
             if (source == null || source.Length == 0)
@@ -74,6 +87,13 @@ namespace ByteHelper
             return bytes;
         }
 
+        /// <summary>
+        /// Remove bytes from a byte array
+        /// </summary>
+        /// <param name="source">The byte array from which the bytes are removed</param>
+        /// <param name="removeAt">The index at which bytes are removed</param>
+        /// <param name="length">The length of bytes to remove</param>
+        /// <returns>The original byte array minus the data removed</returns>
         public static byte[] RemoveBytes(this byte[] source, int removeAt, int length)
         {
 
@@ -86,7 +106,7 @@ namespace ByteHelper
             {
                 return source;
             }
-            
+
             byte[] bytes;
             if (removeAt + length > source.Length)
             {
