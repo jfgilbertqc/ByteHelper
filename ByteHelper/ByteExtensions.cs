@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace ByteHelper
+namespace JFG.ByteHelper
 {
     public static class ByteExtensions
     {

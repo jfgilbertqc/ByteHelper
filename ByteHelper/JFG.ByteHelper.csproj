@@ -7,8 +7,8 @@
     <ProjectGuid>{3A8C7983-6A6D-461C-88E9-B2538F62086F}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ByteHelper</RootNamespace>
-    <AssemblyName>ByteHelper</AssemblyName>
+    <RootNamespace>JFG.ByteHelper</RootNamespace>
+    <AssemblyName>JFG.ByteHelper</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

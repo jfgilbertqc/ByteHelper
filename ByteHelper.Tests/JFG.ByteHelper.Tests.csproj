@@ -9,8 +9,8 @@
     <ProjectGuid>{F3C34AD8-8D9A-46A2-A77F-F9207A8F6AEE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ByteHelper.Tests</RootNamespace>
-    <AssemblyName>ByteHelper.Tests</AssemblyName>
+    <RootNamespace>JFG.ByteHelper.Tests</RootNamespace>
+    <AssemblyName>JFG.ByteHelper.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{3AC096D0-A1C2-E12C-1390-A8335801FDAB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -65,9 +65,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ByteHelper\ByteHelper.csproj">
+    <ProjectReference Include="..\ByteHelper\JFG.ByteHelper.csproj">
       <Project>{3a8c7983-6a6d-461c-88e9-b2538f62086f}</Project>
-      <Name>ByteHelper</Name>
+      <Name>JFG.ByteHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
