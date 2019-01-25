@@ -1,17 +1,16 @@
 ﻿using FluentAssertions;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Xunit;
 
 namespace JFG.ByteHelper.Tests
 {
 
-    [TestClass]
     public class ByteExtensionsTests
     {
 
         #region GetBytes Tests
 
 
-        [TestMethod]
+        [Fact]
         public void GivenNullByteArray_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = null;
@@ -22,7 +21,7 @@ namespace JFG.ByteHelper.Tests
             result.Length.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenEmptyByteArray_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = { };
@@ -32,7 +31,7 @@ namespace JFG.ByteHelper.Tests
             result.Length.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenStartAtLowerThanZero_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = { };
@@ -42,7 +41,7 @@ namespace JFG.ByteHelper.Tests
             result.Length.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenStartAtEqualsToOrGreaterThanArrayLength_WhenGetBytes_ReturnEmptyByteArray()
         {
             byte[] bytes = { 1 };
@@ -52,7 +51,7 @@ namespace JFG.ByteHelper.Tests
             result.Length.Should().Be(0);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenStartAtPlusLengthGreaterThanArrayLength_WhenGetBytes_ReturnSourceArrayFromStartAtToEnd()
         {
             byte[] bytes = { 1, 2 };
@@ -62,7 +61,7 @@ namespace JFG.ByteHelper.Tests
             result.Length.Should().Be(2);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenDataInArray_WhenGetBytes_ReturnByteArray()
         {
             const int expectedNumber1 = 1;
@@ -98,7 +97,7 @@ namespace JFG.ByteHelper.Tests
 
         #region AppendBytes tests
 
-        [TestMethod]
+        [Fact]
         public void GivenTwoNullArrays_WhenAppendBytes_ReturnsEmptyArray()
         {
 
@@ -112,7 +111,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenNullSource_WhenAppendBytes_ReturnsArray()
         {
 
@@ -127,7 +126,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenNullBytesToAppend_WhenAppendBytes_ReturnsArray()
         {
 
@@ -140,7 +139,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenTwoArrays_WhenAppendBytes_ReturnsArray()
         {
 
@@ -159,7 +158,7 @@ namespace JFG.ByteHelper.Tests
 
         #region InsertBytes tests
 
-        [TestMethod]
+        [Fact]
         public void GivenNullArray_WhenInsertBytes_ReturnEmptyArray()
         {
             byte[] bytes = null;
@@ -171,7 +170,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenEmptyArray_WhenInsertBytes_ReturnEmptyArray()
         {
             byte[] bytes = { };
@@ -182,7 +181,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenNullArrayToInsert_WhenInsertBytes_ReturnFirstArray()
         {
             const int expecteNumber1 = 1;
@@ -199,7 +198,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenEmptyArrayToInsert_WhenInsertBytes_ReturnFirstArray()
         {
 
@@ -217,7 +216,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenInsertAtOutOfBounds_WhenInsertBytes_ReturnFirstArray()
         {
 
@@ -235,7 +234,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenDataToInsert_WhenInsertBytes_ReturnEntireData()
         {
 
@@ -261,7 +260,7 @@ namespace JFG.ByteHelper.Tests
 
         #region RemoveBytes tests
 
-        [TestMethod]
+        [Fact]
         public void GivenNullArray_WhenRemove_ReturnEmptyByteArray()
         {
 
@@ -275,7 +274,7 @@ namespace JFG.ByteHelper.Tests
         }
 
 
-        [TestMethod]
+        [Fact]
         public void GivenEmtpyArray_WhenRemove_ReturnEmptyByteArray()
         {
 
@@ -287,7 +286,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenRemoveAtOutOfBounds_WhenRemove_ReturnSourceArray()
         {
 
@@ -312,7 +311,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenRemoveAtPlusLengthGreaterThanDataLength_WhenRemove_ReturnSourceArrayUpToRemoveAt()
         {
 
@@ -328,7 +327,7 @@ namespace JFG.ByteHelper.Tests
 
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenLengthZeroOrNegative_WhenRemove_ReturnSourceArray()
         {
             const int expecteNumber1 = 1;
@@ -351,7 +350,7 @@ namespace JFG.ByteHelper.Tests
             result[2].Should().Be(expecteNumber3);
         }
 
-        [TestMethod]
+        [Fact]
         public void GivenDataToRemove_WhenRemove_ReturnSourceWithoutDataRemoved()
         {
 
